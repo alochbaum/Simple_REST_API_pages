@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Title = MCM9000 API Call to Get Tile Metadata</title>
+</head>
+<body>
+<h2>Extremely simple MCM9000 API Call</h2>
+Enter MCM User Name: <input type="text" id="user" value="Admin"/>
+Password: <input type="password" id="password" value="Admin"/><br>
+Enter MCM IP or URL <input type="text" id="address" value="192.168.3.53"/>    
+<button type="button" onclick="PostMCMCommand()">Get Command for Tiles Metadata</button>
+    <div><span class="replace"> Displays Status </span></div>
+    <div><span class="replace2"> </span></div>
+<script>
+var XMLReq;  
+function PostMCMCommand() {
+  XMLReq = new XMLHttpRequest();
+  XMLReq.onreadystatechange = function ()
+  {
+    document.getElementsByClassName("replace")[0].innerHTML = "Returned Code: " + XMLReq.status;
+    if (XMLReq.status != 200 && XMLReq.status != 302) return;
+    callback(XMLReq);
+  };
+  var username = document.getElementById("user").value;
+  var password = document.getElementById("password").value;
+  var address = "http://" + document.getElementById("address").value;
+  XMLReq.open("GET", address + "/api/5.0/tiles/config/meta/.json");
+  XMLReq.setRequestHeader("Authorization", 'Basic '+ btoa("Admin:Admin"));   
+  XMLReq.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  XMLReq.send();
+}
+function callback(xhr)
+{
+    var jsonString =JSON.parse(xhr.responseText);
+    var jString = JSON.stringify(jsonString,null,"<br>" )
+    document.getElementsByClassName("replace2")[0].innerHTML = jString;
+}
+</script>
+</body>
+</html>
