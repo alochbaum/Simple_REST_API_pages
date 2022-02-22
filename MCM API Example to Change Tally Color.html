@@ -36,7 +36,7 @@ function PostMCMCommand() {
   myJSON += color0 + '"},{"type":"tally","index":1,"color":"' + color1 + '"}] }}';  
     
   XMLReq.open("POST", address + "/api/5.0/tally/command/.json");
-  XMLReq.setRequestHeader("Authorization", 'Basic '+ btoa("Admin:Admin"));   
+  XMLReq.setRequestHeader("Authorization", 'Basic '+ btoa(username + ':' + password));   
   XMLReq.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
   XMLReq.send(myJSON);
 }
