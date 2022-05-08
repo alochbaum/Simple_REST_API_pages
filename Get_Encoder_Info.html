@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Title = MCM9000 API Call to Get Encoders Info</title>
+</head>
+<body>
+    <h2>MCM9000 Get List of Encoders with details</h2>
+    Enter MCM User Name:  <input type="text" id="user" value="Admin"/>Password: <input type="password" id="password" value="Admin"/>
+    <br>Enter MCM IP or URL <input type="text" id="address" value="192.168.3.54"/><br>
+    <button type="button" id="layouts" title="Click me to populate layouts 2" onclick="PostMCMCommand()">Get Encoder Info</button>
+    <div>
+        <span class="replace"> Displays Status </span>
+    </div>
+    <div>
+        <span class="replace2"></span>
+    </div>
+    <script>
+    var XMLReq;
+    var holdReturn="";    
+    const out_resolution=["1920x1080","1080x1920 (90deg)","1280x720","800x448","640x480","640x360","3840x2160","2160x3840 (90deg)"]
+    function PostMCMCommand() {
+ 
+        XMLReq = new XMLHttpRequest();
+        XMLReq.onreadystatechange = function()
+        {
+            holdReturn += XMLReq.status+" = ";
+            document.getElementsByClassName("replace")[0].innerHTML = "Returned Code: " + holdReturn;
+            if (XMLReq.status != 200 ) return;
+            callback(XMLReq);
+        };
+        var username = document.getElementById("user").value;
+        var password = document.getElementById("password").value;
+        var address = "http://" + document.getElementById("address").value;
+
+        XMLReq.open("Get", address + "/api/2.0/outputs/config/.json");
+        XMLReq.setRequestHeader("Authorization", 'Basic ' + btoa("Admin:Admin"));
+        XMLReq.setRequestHeader("Content-Type", "application/json");
+        XMLReq.send();
+    }
+    function callback(xhr)
+    {
+            var convert = xhr.responseText;
+            if(convert.length<5)return;
+            // stripping off first and last bracket as well as curly braces
+            convert=convert.substring(2,convert.length-3);
+            // since the Encoders all have same key word I'm splitting them in to groups
+            const encodeArray = convert.split("}},{");
+            // since I took of 2 curly braces at the end and 1 at the beginning I will have to add them back
+            var jsonStr = '{'+encodeArray[0]+'}}';
+            var jsonData = JSON.parse(jsonStr);
+            var jString="<br>ID --- Title --- Resolution --- UUID <br>";
+      
+            for (let i = 0; i < encodeArray.length; i++) {                
+                // adding back in the 1 start and 2 end curly braces lost in split
+                jsonStr = '{'+encodeArray[i]+'}}';
+                jsonData = JSON.parse(jsonStr); 
+                //el.textContent = jsonData["Encoder"]["title"];               
+                jString += jsonData["Encoder"]["id"];
+                jString += " ----- ";
+                jString += jsonData["Encoder"]["title"];            
+                jString += " --- ";            
+                jString += out_resolution[jsonData["Encoder"]["output_resolution_id"]-1];
+                jString += " --- ";
+                jString += jsonData["Encoder"]["uuid"];
+                jString+= '<br>';                              
+            }
+            document.getElementsByClassName("replace2")[0].innerHTML = jString;
+            // document.getElementsByClassName("replace2")[0].innerHTML = convert;
+        
+    }
+    </script>
+</body>
+</html>
