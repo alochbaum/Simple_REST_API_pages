@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MCM9000 API: Audio Change Buttons</title>
+</head>
+<body>
+    <h2>MCM9000 API: Audio Change Buttons</h2>
+    Enter MCM User Name:  <input type="text" id="user" value="Admin"/>Password: <input type="password" id="password" value="Admin"/>
+    <br>Enter MCM IP or URL <input type="text" id="address" value="192.168.3.54"/>
+    <br>
+    <div>
+        <span class="replace"> Displays Status </span>
+    </div>
+    <input type="button" id="btn1" value="Button 1" onclick="Btn1Command()"></input>
+    <br>    
+    <input type="button" id="btn2" value="Button 2" onclick="Btn2Command()"></input>
+    <br>    
+    <input type="button" id="btn3" value="Button 3" onclick="Btn3Command()"></input> 
+    <br>    
+    <input type="button" id="btn4" value="Button 4" onclick="Btn4Command()"></input>
+    <br>    
+    Settings <br>
+    PID --- Channel ID ---- Encoder ID ---- Button Name
+<!-- I suggest you hard code values for quick operator pages -->
+    <br><input type="number" id="pid1" value=1></input>
+    <input type="number" id="chan1" value=1></input>
+    <input type="number" id="Enc1" value=1></input>
+    <input type="text" id="btn1name" value="Set Nane 1" onchange="Btn1Change()"></input>
+
+    <br><input type="number" id="pid2" value=2></input>
+    <input type="number" id="chan2" value=2></input>
+    <input type="number" id="Enc2" value=2></input>
+    <input type="text" id="btn2name" value="Set Nane 2" onchange="Btn2Change()"></input>
+
+    <br><input type="number" id="pid3" value=3></input>
+    <input type="number" id="chan3" value=3></input>
+    <input type="number" id="Enc3" value=3></input>
+    <input type="text" id="btn3name" value="Set Nane 3" onchange="Btn3Change()"></input>
+
+    <br><input type="number" id="pid4" value=4></input>
+    <input type="number" id="chan4" value=4></input>
+    <input type="number" id="Enc4" value=4></input>
+    <input type="text" id="btn4name" value="Set Nane 4" onchange="Btn4Change()"></input>
+
+    <script>
+    var XMLReq;
+    var AudioPID,ChanID,EncID,BtnName;    
+    
+    // Changing names of buttons    
+    function Btn1Change() {
+        document.getElementById('btn1').value  = document.getElementById('btn1name').value ;
+    } 
+    function Btn2Change() {
+        document.getElementById('btn2').value  = document.getElementById('btn2name').value ;
+    }     
+    function Btn3Change() {
+        document.getElementById('btn3').value  = document.getElementById('btn3name').value ;
+    }     
+    function Btn4Change() {
+        document.getElementById('btn4').value  = document.getElementById('btn4name').value ;
+    }     
+
+    // Setting Values befor call
+    function Btn1Command() {
+        AudioPID = document.getElementById('pid1').value ;
+        ChanID = document.getElementById('chan1').value ;
+        EncID = document.getElementById('Enc1').value ;
+        BtnName = document.getElementById('btn1').value ;
+        PostMCMCommand();
+    }  
+    function Btn2Command() {
+        AudioPID = document.getElementById('pid2').value ;
+        ChanID = document.getElementById('chan2').value ;
+        EncID = document.getElementById('Enc2').value ;
+        BtnName = document.getElementById('btn2').value ;
+        PostMCMCommand();
+    }  
+    function Btn3Command() {
+        AudioPID = document.getElementById('pid3').value ;
+        ChanID = document.getElementById('chan3').value ;
+        EncID = document.getElementById('Enc3').value ;
+        BtnName = document.getElementById('btn3').value ;
+        PostMCMCommand();
+    }  
+    function Btn4Command() {
+        AudioPID = document.getElementById('pid4').value ;
+        ChanID = document.getElementById('chan4').value ;
+        EncID = document.getElementById('Enc4').value ;
+        BtnName = document.getElementById('btn4').value ;
+        PostMCMCommand();
+    }  
+  
+    function PostMCMCommand() {
+ 
+        XMLReq = new XMLHttpRequest();
+        XMLReq.onreadystatechange = function()
+        {
+            document.getElementsByClassName("replace")[0].innerHTML = "Clicked: "+ BtnName
+                +" Returned: " + XMLReq.status;
+            if (XMLReq.status != 200 ) return;
+        };
+        var username = document.getElementById("user").value;
+        var password = document.getElementById("password").value;
+        var address = "http://" + document.getElementById("address").value;
+        //var encoder_id = document.getElementById("encoder_id").value;
+        XMLReq.open("Get", address + "/api/2.0/outputs/command/setSourceAudioPid/"+EncID+
+            "/"+ChanID+"/"+AudioPID+"/.json");
+        XMLReq.setRequestHeader("Authorization", 'Basic ' + btoa("Admin:Admin"));
+        XMLReq.setRequestHeader("Content-Type", "application/json");
+        XMLReq.send();
+    }
+
+    </script>
+</body>
+</html>
