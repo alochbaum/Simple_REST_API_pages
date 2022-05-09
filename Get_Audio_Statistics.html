@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Title = MCM9000 API Get Audio PID Statistics</title>
+</head>
+<body>
+    <h2>MCM9000 Get Audio PID Statistics</h2>
+    Enter MCM User Name:  <input type="text" id="user" value="Admin"/>Password: <input type="password" id="password" value="Admin"/>
+    <br>Enter MCM IP or URL <input type="text" id="address" value="192.168.3.54"/>
+    <br>
+    <button type="button" id="layouts" title="Click_me" onclick="PostMCMCommand()">Get Audio PIDs</button>
+    <div>
+        <span class="replace"> Displays Status </span>
+    </div>
+    <div>
+        <span class="replace2"></span>
+    </div>
+    <script>
+    var XMLReq;
+    var holdReturn="";    
+    function PostMCMCommand() {
+ 
+        XMLReq = new XMLHttpRequest();
+        XMLReq.onreadystatechange = function()
+        {
+            holdReturn += XMLReq.status+" = ";
+            document.getElementsByClassName("replace")[0].innerHTML = "Returned Code: " + holdReturn;
+            if (XMLReq.status != 200 ) return;
+            callback(XMLReq);
+        };
+        var username = document.getElementById("user").value;
+        var password = document.getElementById("password").value;
+        var address = "http://" + document.getElementById("address").value;
+        //var encoder_id = document.getElementById("encoder_id").value;
+        XMLReq.open("Get", address + "/api/2.0/channels/statistics/audio_pids_statistics/.json");
+        XMLReq.setRequestHeader("Authorization", 'Basic ' + btoa("Admin:Admin"));
+        XMLReq.setRequestHeader("Content-Type", "application/json");
+        XMLReq.send();
+    }
+    function callback(xhr)
+    {
+            var convert = xhr.responseText;
+            if(convert.length<5)return;
+        
+            // stripping off first and last bracket as well as curly braces
+            convert=convert.substring(2,convert.length-3);
+            // since the Encoders all have same key word I'm splitting them in to groups
+            const encodeArray = convert.split("}},{");
+            // since I took of 2 curly braces at the end and 1 at the beginning I will have to add them back
+            var jsonStr = '{'+encodeArray[0]+'}}';
+            var jsonData = JSON.parse(jsonStr);
+            var jString="<br>pid --- channel_source_id --- lang --- current_short > -680 is active <br>";
+      
+            for (let i = 0; i < encodeArray.length; i++) {                
+                // adding back in the 1 start and 2 end curly braces lost in split
+                jsonStr = '{'+encodeArray[i]+'}}';
+                jsonData = JSON.parse(jsonStr); 
+                //el.textContent = jsonData["Encoder"]["title"];               
+                jString += jsonData["AudioPidStatistics"]["pid"];
+                jString += " ---- ";
+                jString += jsonData["AudioPidStatistics"]["channel_source_id"];            
+                jString += " --- ";            
+                jString += jsonData["AudioPidStatistics"]["lang"];
+                jString += " --- ";
+                jString += jsonData["AudioPidStatistics"]["current_short"];
+                jString+= '<br>';                              
+            }
+            document.getElementsByClassName("replace2")[0].innerHTML = jString;
+        
+            //document.getElementsByClassName("replace2")[0].innerHTML = convert;
+        
+    }
+    </script>
+</body>
+</html>
