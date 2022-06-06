@@ -1,2 +1,2 @@
 # Simple_REST_API_pages
-This has simple example pages to copy, edit and create easy REST API Calls
+A collection of single HTML API pages for MCM9000, with no library calls; with limited number of lines for starting point for users.
