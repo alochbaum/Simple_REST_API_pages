@@ -7,7 +7,7 @@
 <h2>MCM9000 API Call to Post Tally Colors (Please edit for your use)</h2>
 Enter MCM User Name: <input type="text" id="user" value="Admin"/>
 Password: <input type="password" id="password" value="Admin"/><br>
-Enter MCM IP or URL <input type="text" id="address" value="192.168.3.53"/> <br>
+Enter MCM IP or URL <input type="text" id="address" value="192.168.3.54"/> <br>
 Tally Name:  <input type="text" id="tally" value="TestTally"/>
 Color 0:   <input type="color" id="color0" value="#DD2222"/>
 Color 1:   <input type="color" id="color1" value="#22DD22"/>    
@@ -32,7 +32,8 @@ function PostMCMCommand() {
   var color1 = document.getElementById("color1").value;  
   
   // JSON object replacing tally and 2 colors, note duration is 0 so it will last forever  
-  var myJSON = '{"data":{"uuid":"' + tally + '","duration":0,"items":[{"type":"tally","index":0,"color":"' ;
+  // first name is "label" in later version 5.6.5 and higher, it is "uuid" in earlier versions
+  var myJSON = '{"data":{"label":"' + tally + '","duration":0,"items":[{"type":"tally","index":0,"color":"' ;
   myJSON += color0 + '"},{"type":"tally","index":1,"color":"' + color1 + '"}] }}';  
     
   XMLReq.open("POST", address + "/api/5.0/tally/command/.json");
