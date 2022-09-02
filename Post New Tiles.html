@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Post New Tile API 5.0 for MCM9000</title>
+</head>
+<body>
+    <h2>Post New Tile API 5.0 for MCM9000</h2>
+    Enter MCM User Name:  <input type="text" id="user" value="Admin"/>Password: <input type="password" id="password" value="Admin"/>
+    <br>Enter MCM IP or URL <input type="text" id="address" value="192.168.3.50"/><br>
+    <div>
+        <span class="replace"></span>
+    </div>
+    <div>
+        <span class="replace2"></span>
+		<br>
+    </div>
+ 
+
+		<button type="button" id="btnPost" onclick="PostTile()">Post New Tile in JSON format, to edit you must delete old name</button><br>
+	<!-- 
+	-->
+	<textarea id="postdata" rows="50" cols="60" style="height:auto;">
+	</textarea>
+
+
+    <script>
+    var XMLReq;
+
+	function PostTile(){
+			//document.getElementsByClassName("replace")[0].innerHTML = "Post Button";
+        XMLRq = new XMLHttpRequest();
+		/*
+        XMLRq.onreadystatechange = function()
+        {
+            holdReturn += XMLReq.status+" = ";
+            document.getElementsByClassName("replace")[0].innerHTML = "Returned Code: " + holdReturn;
+            if (XMLReq.status != 200 ) return;
+            callback(XMLReq);
+        };
+		*/
+        var username = document.getElementById("user").value;
+        var password = document.getElementById("password").value;
+        var address = "http://" + document.getElementById("address").value;
+		var mypost = document.getElementById("postdata").value;
+		//document.getElementsByClassName("replace")[0].innerHTML = "Deeper ";
+		
+        XMLRq.open("POST", address + "/api/5.0/tiles/config/.json");
+        XMLRq.setRequestHeader("Authorization", 'Basic ' + btoa(username+":"+password));
+		XMLRq.setRequestHeader("Accept", "application/json");
+        XMLRq.setRequestHeader("Content-Type", "application/json");
+		
+		XMLRq.onload = () => document.getElementsByClassName("replace2")[0].innerHTML = XMLRq.responseText;
+
+        XMLRq.send(mypost);	
+		//		document.getElementsByClassName("replace")[0].innerHTML = "Deepest ";
+	}
+	/*
+    function callback(xhr)
+    {
+            var convert = 
+            document.getElementsByClassName("replace2")[0].innerHTML = convert;        
+    }
+	*/
+    </script>
+</body>
+</html>
