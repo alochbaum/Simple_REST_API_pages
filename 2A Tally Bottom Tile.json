@@ -1,0 +1,225 @@
+{
+  "data": {
+    "label": "2A Tally Bottom",
+    "version": 0,
+    "content_type": "Channel",
+    "min_width": 184,
+    "min_height": 160,
+    "default_width": 368,
+    "default_height": 320,
+    "description": "2 audio meters, UMD bottom with left and right bottom tally chips",
+    "objects": [{
+      "type": "Border",
+      "left": {
+        "pixels": 0,
+        "percentage": null
+      },
+      "right": {
+        "pixels": 0,
+        "percentage": null
+      },
+      "top": {
+        "pixels": 0,
+        "percentage": null
+      },
+      "bottom": {
+        "pixels": 0,
+        "percentage": null
+      },
+      "max_width": {
+        "pixels": null,
+        "percentage": 100
+      },
+      "max_height": {
+        "pixels": null,
+        "percentage": 100
+      },
+      "alignment": "Top Left",
+      "index": 1,
+      "variant": "Dynamic"
+    }, {
+      "type": "Video",
+      "left": {
+        "pixels": 4,
+        "percentage": null
+      },
+      "right": {
+        "pixels": 4,
+        "percentage": null
+      },
+      "top": {
+        "pixels": 4,
+        "percentage": null
+      },
+      "bottom": {
+        "pixels": 34,
+        "percentage": null
+      },
+      "max_width": {
+        "pixels": null,
+        "percentage": 100
+      },
+      "max_height": {
+        "pixels": null,
+        "percentage": 100
+      },
+      "alignment": "Top Left",
+      "index": 1,
+      "variant": null
+    }, {
+      "type": "UMD",
+      "left": {
+        "pixels": 110,
+        "percentage": null
+      },
+      "bottom": {
+        "pixels": 10,
+        "percentage": null
+      },
+      "max_width": {
+        "pixels": null,
+        "percentage": 100
+      },
+      "max_height": {
+        "pixels": 20,
+        "percentage": null
+      },
+      "alignment": "Bottom Center",
+      "index": 1,
+      "variant": "Opaque",
+      "default_value": null
+    },  {
+      "type": "Audio",
+      "left": {
+        "pixels": 8,
+        "percentage": null
+      },
+      "right": {
+        "pixels": 8,
+        "percentage": null
+      },
+      "top": {
+        "pixels": 8,
+        "percentage": null
+      },
+      "bottom": {
+        "pixels": 26,
+        "percentage": null
+      },
+      "max_width": {
+        "pixels": 54,
+        "percentage": null
+      },
+      "max_height": {
+        "pixels": 400,
+        "percentage": null
+      },
+      "alignment": "Bottom Left",
+      "index": 1,
+      "variant": "#1"
+    }, {
+      "type": "Audio",
+      "left": {
+        "pixels": 8,
+        "percentage": null
+      },
+      "right": {
+        "pixels": 8,
+        "percentage": null
+      },
+      "top": {
+        "pixels": 8,
+        "percentage": null
+      },
+      "bottom": {
+        "pixels": 26,
+        "percentage": null
+      },
+      "max_width": {
+        "pixels": 54,
+        "percentage": null
+      },
+      "max_height": {
+        "pixels": 400,
+        "percentage": null
+      },
+      "alignment": "Bottom Right",
+      "index": 2,
+      "variant": "#1"
+    }, {
+      "type": "Alarm",
+      "left": {
+        "pixels": 8,
+        "percentage": null
+      },
+      "right": {
+        "pixels": 8,
+        "percentage": null
+      },
+      "top": {
+        "pixels": 28,
+        "percentage": null
+      },
+      "bottom": {
+        "pixels": 0,
+        "percentage": null
+      },
+      "max_width": {
+        "pixels": 400,
+        "percentage": null
+      },
+      "max_height": {
+        "pixels": 400,
+        "percentage": null
+      },
+      "alignment": "Top Center",
+      "index": 1,
+      "variant": "Rounded corners"
+    }, {
+      "type": "Other",
+      "left": {
+        "pixels": 2,
+        "percentage": null
+      },
+      "bottom": {
+        "pixels": 0,
+        "percentage": null
+      },
+      "max_width": {
+        "pixels": 150,
+        "percentage": null
+      },
+      "max_height": {
+        "pixels": 30,
+        "percentage": null
+      },
+      "alignment": "Bottom Left",
+      "index": 1,
+      "variant": "Tally Light"
+    }, {
+      "type": "Other",
+      "right": {
+        "pixels": 2,
+        "percentage": null
+      },
+      "bottom": {
+        "pixels": 0,
+        "percentage": null
+      },
+      "max_width": {
+        "pixels": 150,
+        "percentage": null
+      },
+      "max_height": {
+        "pixels": 30,
+        "percentage": null
+      },
+      "alignment": "Bottom Right",
+      "index": 2,
+      "variant": "Tally Light"
+    }]
+  },
+  "metadata": {
+    "config_version": 0
+  }
+}
