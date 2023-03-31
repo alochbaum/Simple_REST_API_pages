@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tile num by Layouts MCM9000 API 4.0</title>
+</head>
+<body>
+    <h2>MCM9000 API 4.0 Get Tile Index by Layouts</h2>
+	
+    Enter MCM User Name:  <input type="text" id="user" value="Admin"/>Password: <input type="password" id="password" value="Admin"/>
+    <br>Enter MCM IP or URL <input type="text" id="address" value="192.168.3.50"/><br>
+
+    <button type="button" id="btn_layout_types" onclick="PostMCMCommand()">First get layouts</button>
+	<select id="dLayouts">
+		<option> none selected </option>
+	</select>
+	<button type="button" id="btn_tile_indexes" onclick="PostMCMCommand2()">&lt- Get tile indexes for layout selected</button>
+    <div>
+        <span class="replace"> Displays Status </span>
+    </div>
+    <div>
+        <span class="replace2"></span>
+    </div>
+
+    <script>
+    var XMLReq, XMLReq2;
+    var holdReturn="";
+	var storeLayout = [];
+	const $layoutSelect = document.querySelector('#dLayouts');
+    var username = document.getElementById("user").value;
+    var password = document.getElementById("password").value;
+    var address = "http://" + document.getElementById("address").value;
+		
+	window.onload=function(){
+		document.getElementById('dLayouts').style.visibility='hidden';
+		document.getElementById('btn_tile_indexes').style.visibility='hidden';
+	} 	
+	
+    function PostMCMCommand() {
+ 
+        XMLReq = new XMLHttpRequest();
+        XMLReq.onreadystatechange = function()
+        {
+            holdReturn += XMLReq.status+" = ";
+            document.getElementsByClassName("replace")[0].innerHTML = "Returned Code: " + holdReturn;
+            if (XMLReq.status != 200 ) return;
+            callback(XMLReq);
+        };
+    
+        XMLReq.open("Get", address + "/api/4.0/layouts/.json");
+        XMLReq.setRequestHeader("Authorization", 'Basic ' + btoa(username+":"+password));
+        XMLReq.setRequestHeader("Content-Type", "application/json");
+        XMLReq.send();
+    }
+    function callback(xhr)
+    {
+            var convert = xhr.responseText;
+			var jsonData = JSON.parse(convert);
+			
+            var jString="<br>UUID                  --- label -- resolution <br>";
+			//jString+=jsonStr;
+  
+			for(var i in jsonData) {
+			    var LTuuid = jsonData[i]["Layout"]["uuid"];
+				jString += LTuuid;
+				//jString += jsonData[i]["Layout"]["uuid"];
+				jString += " -- ";  
+				var LTlabel = jsonData[i]["Layout"]["label"];
+				jString += LTlabel;
+				jString += " -- "; 
+				var LTres =  jsonData[i]["Layout"]["resolution"];
+				jString += LTres;
+				var Layout = {
+					uuid: LTuuid,
+					label: LTlabel,
+					resolution: LTres
+				}
+				storeLayout.push(Layout);
+				jString += "<br>";                                
+            }          
+            document.getElementsByClassName("replace2")[0].innerHTML = jString;
+			document.getElementById("btn_layout_types").innerHTML = "Refresh Layouts";
+			$layoutSelect.options.length=0;
+			for (let i = 0; i < storeLayout.length; i++)
+			{
+				var opt = document.createElement('option');
+				opt.innerHTML = storeLayout[i]["label"];
+				opt.value = storeLayout[i]["uuid"];
+				$layoutSelect.appendChild(opt);	
+			}
+			document.getElementById('dLayouts').style.visibility='visible';
+			document.getElementById('btn_tile_indexes').style.visibility='visible';
+            //document.getElementsByClassName("replace2")[0].innerHTML = convert;
+			//document.getElementsByClassName("replace")[0].innerHTML = storeLayout.length;
+        
+    }
+    function PostMCMCommand2() {
+		var dvalue = $layoutSelect.value;
+	    document.getElementsByClassName("replace2")[0].innerHTML = dvalue;
+ 
+        XMLReq2 = new XMLHttpRequest();
+        XMLReq2.onreadystatechange = function()
+        {
+            holdReturn += XMLReq2.status+" = ";
+            document.getElementsByClassName("replace")[0].innerHTML = "Returned Code: " + holdReturn;
+            if (XMLReq2.status != 200 ) return;
+            callback2(XMLReq2);
+        };
+
+        XMLReq2.open("Get", address + "/api/4.0/layouts/"+dvalue+"/.json");
+        XMLReq2.setRequestHeader("Authorization", 'Basic ' + btoa(username+":"+password));
+        XMLReq2.setRequestHeader("Content-Type", "application/json");
+        XMLReq2.send();
+
+
+    }
+    function callback2(xhr)
+    {
+            var convert = xhr.responseText;
+			var jsonData = JSON.parse(convert);
+			
+            var jString="<br>index -- channel_label -- umd_1 -- umd_2 -- tally_settings<br>";
+			//jString+=jsonStr;
+  
+			for(var i2 in jsonData["Layout"]["Tiles"]) {
+			    jString += jsonData["Layout"]["Tiles"][i2]["index"];
+				jString += " -- ";  
+			    jString += jsonData["Layout"]["Tiles"][i2]["channel_label"];
+				jString += " -- "; 
+				jString += jsonData["Layout"]["Tiles"][i2]["umd_1"];
+				jString += " -- "; 
+				jString += jsonData["Layout"]["Tiles"][i2]["umd_2"];
+				jString += " -- "; 
+				jString += jsonData["Layout"]["Tiles"][i2]["tally_settings"];
+				jString += "<br>";                                
+            }          
+            document.getElementsByClassName("replace2")[0].innerHTML = jString;
+            //document.getElementsByClassName("replace2")[0].innerHTML = convert;
+			//document.getElementsByClassName("replace")[0].innerHTML = storeLayout.length;
+        
+    }
+     </script>
+</body>
+</html>
