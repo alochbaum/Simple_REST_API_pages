@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Change output layout</title>
+  <script>
+    function authenticate() {
+      var username = document.getElementById('username').value;
+      var password = document.getElementById('password').value;
+      var serverIP = document.getElementById('serverIP').value;
+      var serverPort = document.getElementById('serverPort').value;
+
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', 'https://'+serverIP+':'+serverPort+'/api/5.1/auth/login');
+      xhr.setRequestHeader('accept', 'application/json');
+      xhr.setRequestHeader('Content-Type', 'application/json');
+
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status === 201) {
+          try {
+            var response = JSON.parse(xhr.responseText);
+            var refreshToken = response.data["refresh_token"];
+            var accessToken = response.data["access_token"];
+            const decode = decodeJWT(accessToken);
+//            var millisecs = Date.now();
+//            document.getElementById('apiResponse').textContent = decode.exp +" "+millisecs;
+            localStorage.setItem('refreshToken', refreshToken);
+            localStorage.setItem('accessToken', accessToken);
+            localStorage.setItem('expiration', decode.exp);
+            document.getElementById('authResponse').textContent = 'Authentication successful. Refresh token saved.';
+           }
+           catch(err)
+           {
+            document.getElementById('authResponse').textContent = 'Problem Parsing Auth: '+err.message;           
+           }
+          } else {
+            document.getElementById('authResponse').textContent = 'Authentication failed. Status code: ' + xhr.status;
+          }
+        }
+      };
+
+      var sendingData = JSON.stringify({
+        username: username,
+        password: password
+      });
+
+      xhr.send(sendingData);
+    }
+
+    function makeAPICall() {
+      var refreshToken = localStorage.getItem('refreshToken');
+      if (refreshToken) {
+        // Make API call using the refresh token
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'http://example.com/api', true);
+        xhr.setRequestHeader('Authorization', 'Bearer ' + refreshToken);
+
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+              console.log('API call successful. Response: ' + xhr.responseText);
+            } else {
+              console.log('API call failed. Status code: ' + xhr.status);
+            }
+          }
+        };
+
+        xhr.send();
+      } else {
+        console.log('Refresh token not found. Please authenticate first.');
+      }
+    }
+  </script>
+</head>
+<body>
+  <h1>Authentication Page</h1>
+  <label for="username">Username:</label>
+  <input type="text" id="username" value="Admin"/><br>
+  <label for="password">Password:</label>
+  <input type="password" id="password" value="Admin"/><br>
+  <label for="serverIP">Server IP:</label>
+  <input type="text" id="serverIP" value="192.168.3.80"/><br>
+  <label for="serverPort">Server Port:</label>
+  <input type="text" id="serverPort" value="443"/><br />
+  <button onclick="authenticate()">Authenticate</button>
+  <button onclick="makeAPICall()">Make API Call</button>
+  <br>
+  <span id="authResponse" class="response"></span>
+  <br>
+  <span id="apiResponse" class="response"></span>
+</body>
+</html>
