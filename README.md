@@ -1,16 +1,18 @@
 # Simple_REST_API_pages
-A collection of single HTML API pages for MCM9000, with no library calls; with limited number of lines for starting point for users.
+A collection of single HTML API pages for TAG Video Systems MCM9000s or MCS control of MCM9000s, with no library calls; with limited number of lines.
 
-Most of the pages use basic authentication including https://github.com/alochbaum/Simple_REST_API_pages/blob/main/GetTileIndexByLayouts50.html
+I encourage TAG clients to take these files as starting points to build their own HTML control interfaces for the MCMs.
+
+Here is a table of the files in this archive, with the API version being used and Type of authentication or data file.
 
 * API Type URL
-* -.- JSON   https://github.com/alochbaum/Simple_REST_API_pages/blob/main/2A%20Tally%20Bottom%20Tile.json
-* 2.0 Basic  https://github.com/alochbaum/Simple_REST_API_pages/blob/main/Audio_Change_Buttons.html
-* 2.0 Basic  https://github.com/alochbaum/Simple_REST_API_pages/blob/main/Delete%20Tiles.html
-* 2.0 Basic  https://github.com/alochbaum/Simple_REST_API_pages/blob/main/Get%20Errors.html
-* 5.0 Basic  https://github.com/alochbaum/Simple_REST_API_pages/blob/main/Get%20Tiles.html
-* 4.0 Basic  https://github.com/alochbaum/Simple_REST_API_pages/blob/main/GetTileIndexByLayouts40.html
-* 5.0 Basic  https://github.com/alochbaum/Simple_REST_API_pages/blob/main/GetTileIndexByLayouts50.html
+* -.- JSON   [sample tally bottom tile JSON](https://github.com/alochbaum/Simple_REST_API_pages/blob/main/2A%20Tally%20Bottom%20Tile.json)
+* 2.0 Basic  [audio change buttons](https://github.com/alochbaum/Simple_REST_API_pages/blob/main/Audio_Change_Buttons.html)
+* 2.0 Basic  [delete tiles](https://github.com/alochbaum/Simple_REST_API_pages/blob/main/Delete%20Tiles.html)
+* 2.0 Basic  [get errors](https://github.com/alochbaum/Simple_REST_API_pages/blob/main/Get%20Errors.html)
+* 5.0 Basic  [get tiles](https://github.com/alochbaum/Simple_REST_API_pages/blob/main/Get%20Tiles.html)
+* 4.0 Basic  [get tile index by layouts-api older](https://github.com/alochbaum/Simple_REST_API_pages/blob/main/GetTileIndexByLayouts40.html)
+* 5.0 Basic  [get tile index by layouts](https://github.com/alochbaum/Simple_REST_API_pages/blob/main/GetTileIndexByLayouts50.html)
 * 4.0 Basic  [get tile index by template](https://github.com/alochbaum/Simple_REST_API_pages/blob/main/GetTileIndexByTemplate40.html)
 * 2.0 Basic  [get audio statistics](https://github.com/alochbaum/Simple_REST_API_pages/blob/main/Get_Audio_Statistics.html)
 * 2.0 Basic  [get encoder information](https://github.com/alochbaum/Simple_REST_API_pages/blob/main/Get_Encoder_Info.html)
