@@ -18,8 +18,6 @@ Most of the pages use basic authentication including https://github.com/alochbau
 * 5.0 Basic  https://github.com/alochbaum/Simple_REST_API_pages/blob/main/MCM9000%20API%20Call%20to%20Get%20Tile%20Metadata.html
 * 5.0 Basic  https://github.com/alochbaum/Simple_REST_API_pages/blob/main/Post%20New%20Tiles.html
 * 2.0 Basic  https://github.com/alochbaum/Simple_REST_API_pages/blob/main/Reboot_or_hardReset_Buttons.html
-* 2.0 Basic  https://github.com/alochbaum/Simple_REST_API_pages/blob/main/Shutdown_Buttons.html
+* 2.0 Basic  [shutdown buttons](https://github.com/alochbaum/Simple_REST_API_pages/blob/main/)
 * 2.0 Basic  https://github.com/alochbaum/Simple_REST_API_pages/blob/main/SoftReset_Buttons.html
 * 4.0 Basic  https://github.com/alochbaum/Simple_REST_API_pages/blob/main/TestTileIndexs.html
-* [shutdown buttons](https://github.com/alochbaum/Simple_REST_API_pages/blob/man/Shutdown_Butttons.html)
-[shutdown buttons](https://github.com/alochbaum/Simple_REST_API_pages/blob/man/Shutdown_Butttons.html)
