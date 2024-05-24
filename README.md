@@ -21,4 +21,5 @@ Most of the pages use basic authentication including https://github.com/alochbau
 * 2.0 Basic  https://github.com/alochbaum/Simple_REST_API_pages/blob/main/Shutdown_Buttons.html
 * 2.0 Basic  https://github.com/alochbaum/Simple_REST_API_pages/blob/main/SoftReset_Buttons.html
 * 4.0 Basic  https://github.com/alochbaum/Simple_REST_API_pages/blob/main/TestTileIndexs.html
-# Test Heading
+* [shutdown buttons](https://github.com/alochbaum/Simple_REST_API_pages/blob/man/Shutdown_Butttons.html)
+[shutdown buttons](https://github.com/alochbaum/Simple_REST_API_pages/blob/man/Shutdown_Butttons.html)
