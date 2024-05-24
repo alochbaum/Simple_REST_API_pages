@@ -5,10 +5,10 @@ I encourage TAG clients to take these files as starting points to build their ow
 
 Here is a table of the files in this archive, with the API version being used and Type of authentication or data file.
 
-  API Type  Link
-  --- ----- -------------------------------
-* 5.0 Token  [select layout 1](https://github.com/alochbaum/Simple_REST_API_pages/blob/main/Select_Layout.html)
-* -.- JSON   [sample tally bottom tile JSON](https://github.com/alochbaum/Simple_REST_API_pages/blob/main/2A%20Tally%20Bottom%20Tile.json)
+|:---:|:---:|:---|
+| API | Type | Link |
+| 5.0 | Token | [select layout 1](https://github.com/alochbaum/Simple_REST_API_pages/blob/main/Select_Layout.html) |
+| -.- | JSON | [sample tally bottom tile JSON](https://github.com/alochbaum/Simple_REST_API_pages/blob/main/2A%20Tally%20Bottom%20Tile.json) |
 * 2.0 Basic  [audio change buttons](https://github.com/alochbaum/Simple_REST_API_pages/blob/main/Audio_Change_Buttons.html)
 * 2.0 Basic  [delete tiles](https://github.com/alochbaum/Simple_REST_API_pages/blob/main/Delete%20Tiles.html)
 * 2.0 Basic  [get errors](https://github.com/alochbaum/Simple_REST_API_pages/blob/main/Get%20Errors.html)
