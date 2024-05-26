@@ -1,18 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>This page converts ASCII string in to hex</title>
+    <title>Convert ASCII to Hex</title>
 </head>
 <body>  
-    <h2>Convert ASCII to Hex</h2>
+    <h2>This page converts ASCII to Hexidecimal for MCM pass phrases.</h2>
     Enter ASCII string:  <input type="text" id="ascii" value="Admin"/>
     <br>
     <button type="button" id="layouts" onclick="ConvertCommand()">Convert</button>
     <div>
-        <span class="replace"> Displays Status </span>
-    </div>
-    <div>
-        <span class="replace2"></span>
+        <span class="replace"></span>
     </div>
     <script>
     var XMLReq;
@@ -20,7 +17,7 @@
     function ConvertCommand() {
         var ascii = document.getElementById("ascii").value;
         var hex = asciiToHex(ascii);
-        document.getElementsByClassName("replace2")[0].innerHTML = "Hex: " + hex;
+        document.getElementsByClassName("replace")[0].innerHTML = "Hex: " + hex;
     }
     function asciiToHex(str) {
         var arr = [];
