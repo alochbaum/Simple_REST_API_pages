@@ -7,13 +7,13 @@ Here is a table of the files in this archive, with the API version being used an
 
  API | Type | Link | Run
 :---:|:---:|:---|:---
- 5.0 | Token | [select layout 1](https://github.com/alochbaum/Simple_REST_API_pages/blob/main/Select_Layout.html)|
+ 5.0 | Token | [select layout 1](https://github.com/alochbaum/Simple_REST_API_pages/blob/main/Select_Layout.html)| [run](https://htmlpreview.github.io/?https://github.com/alochbaum/Simple_REST_API_pages/blob/main/Select_Layout.html)
  -.- | HTML | [convert asii to hex](https://github.com/alochbaum/Simple_REST_API_pages/blob/main/Calculate_Hex_Passphrase.html) | [run](https://htmlpreview.github.io/?https://github.com/alochbaum/Simple_REST_API_pages/blob/main/Calculate_Hex_Passphrase.html)|
  -.- | JSON | [sample tally bottom tile JSON](https://github.com/alochbaum/Simple_REST_API_pages/blob/main/2A%20Tally%20Bottom%20Tile.json) |
- 2.0 | Basic | [audio change buttons](https://github.com/alochbaum/Simple_REST_API_pages/blob/main/Audio_Change_Buttons.html)|
- 2.0 | Basic |  [delete tiles](https://github.com/alochbaum/Simple_REST_API_pages/blob/main/Delete%20Tiles.html)|
- 2.0 | Basic | [get errors](https://github.com/alochbaum/Simple_REST_API_pages/blob/main/Get%20Errors.html)|
- 5.0 | Basic | [get tiles](https://github.com/alochbaum/Simple_REST_API_pages/blob/main/Get%20Tiles.html)|
+ 2.0 | Basic | [audio change buttons](https://github.com/alochbaum/Simple_REST_API_pages/blob/main/Audio_Change_Buttons.html)| [run](https://htmlpreview.github.io/https://github.com/alochbaum/Simple_REST_API_pages/blob/main/Audio_Change_Buttons.html)
+ 2.0 | Basic |  [delete tiles](https://github.com/alochbaum/Simple_REST_API_pages/blob/main/Delete%20Tiles.html)|[run](https://htmlpreview.github.io/https://github.com/alochbaum/Simple_REST_API_pages/blob/main/Delete%20Tiles.html)
+ 2.0 | Basic | [get errors](https://github.com/alochbaum/Simple_REST_API_pages/blob/main/Get%20Errors.html)|[run](https://htmlpreview.github.io/https://github.com/alochbaum/Simple_REST_API_pages/blob/main/Get%20Errors.html)
+ 5.0 | Basic | [get tiles](https://github.com/alochbaum/Simple_REST_API_pages/blob/main/Get%20Tiles.html)|[run](https://htmlpreview.github.io/)
  4.0 | Basic | [get tile index by layouts-api older](https://github.com/alochbaum/Simple_REST_API_pages/blob/main/GetTileIndexByLayouts40.html)|
  5.0 | Basic | [get tile index by layouts](https://github.com/alochbaum/Simple_REST_API_pages/blob/main/GetTileIndexByLayouts50.html)|
  4.0 | Basic | [get tile index by template](https://github.com/alochbaum/Simple_REST_API_pages/blob/main/GetTileIndexByTemplate40.html)|
