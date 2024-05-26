@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>This page converts ASCII string in to hex</title>
+</head>
+<body>  
+    <h2>Convert ASCII to Hex</h2>
+    Enter ASCII string:  <input type="text" id="ascii" value="Admin"/>
+    <br>
+    <button type="button" id="layouts" onclick="ConvertCommand()">Convert</button>
+    <div>
+        <span class="replace"> Displays Status </span>
+    </div>
+    <div>
+        <span class="replace2"></span>
+    </div>
+    <script>
+    var XMLReq;
+    var holdReturn="";    ;
+    function ConvertCommand() {
+        var ascii = document.getElementById("ascii").value;
+        var hex = asciiToHex(ascii);
+        document.getElementsByClassName("replace2")[0].innerHTML = "Hex: " + hex;
+    }
+    function asciiToHex(str) {
+        var arr = [];
+        for (var i = 0, l = str.length; i < l; i ++) {
+            var hex = Number(str.charCodeAt(i)).toString(16);
+            arr.push(hex);
+        }
+        return arr.join('');
+    }
+</body>
+</html>
