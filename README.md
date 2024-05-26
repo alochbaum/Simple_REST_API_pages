@@ -7,7 +7,8 @@ Here is a table of the files in this archive, with the API version being used an
 
  API | Type | Link 
 :---:|:---:|:---
- 5.0 | Token | [select layout 1](https://github.com/alochbaum/Simple_REST_API_pages/blob/main/Select_Layout.html) 
+ 5.0 | Token | [select layout 1](https://github.com/alochbaum/Simple_REST_API_pages/blob/main/Select_Layout.html)
+ -.- | HTML | [convert asii to hex](https://github.com/alochbaum/Simple_REST_API_pages/blob/main/Calculate_Hex_Passphrase.html) 
  -.- | JSON | [sample tally bottom tile JSON](https://github.com/alochbaum/Simple_REST_API_pages/blob/main/2A%20Tally%20Bottom%20Tile.json) 
  2.0 | Basic | [audio change buttons](https://github.com/alochbaum/Simple_REST_API_pages/blob/main/Audio_Change_Buttons.html)
  2.0 | Basic |  [delete tiles](https://github.com/alochbaum/Simple_REST_API_pages/blob/main/Delete%20Tiles.html)
