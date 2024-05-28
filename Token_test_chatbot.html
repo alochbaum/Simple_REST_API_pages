@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barter Token Authentication</title>
+</head>
+<body>
+    <h2>Barter Token Authentication</h2>
+    <div id="authResponse"></div>
+    <script>
+
+var xhr = new XMLHttpRequest();
+
+// Prepare the request
+xhr.open("POST", "https://192.168.3.80:443/api/5.0/auth/login", true);
+xhr.setRequestHeader("Content-Type", "application/json");
+
+// Define the data to be sent in the request body
+var data = JSON.stringify({
+  username: "Admin",
+  password: "Admin"
+});
+
+// Set up a function to handle the response
+xhr.onload = function () {
+  // Check if the request was successful
+  if (xhr.status >= 200 && xhr.status < 300) {
+    // Parse the response JSON
+    var response = JSON.parse(xhr.responseText);
+    
+    // Access the access token from the response
+    var accessToken = response.access_token;
+    
+    // Use the access token as needed
+    document.getElementById('authResponse').textContent = 'Access Token:' + accessToken;
+  } else {
+    // Request failed
+    document.getElementById('authResponse').textContent = 'Request failed with status:' + xhr.status;
+  }
+};
+
+// Set up a function to handle errors
+xhr.onerror = function () {
+  console.error("Request failed");
+};
+
+// Send the request with the data
+xhr.send(data);
+        
+    </script>
+</body>
+</html>

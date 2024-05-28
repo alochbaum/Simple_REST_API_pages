@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Token Authentication</title>
+    <script>
+        function authenticate() {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            var serverIP = document.getElementById('serverIP').value;
+            var serverPort = document.getElementById('serverPort').value;
+            var sendingData = JSON.stringify({
+                username: username,
+                password: password
+            });
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'https://' + serverIP + ':' + serverPort + '/api/5.0/auth/login/');
+            //xhr.setRequestHeader('accept', 'application/json');
+            xhr.setRequestHeader('Content-Type', 'application/json');
+        
+            xhr.onreadystatechange = function() {
+               // if (xhr.readyState === XMLHttpRequest.DONE) {
+                   if(xhr.status >= 200 && xhr.status < 300){
+                    try {
+                        // Decode JWT access token if needed
+                        //var decode = decodeJWT(xhr);
+                        var response = JSON.parse(xhr.responseText);
+                        var refreshToken = response.refresh_token;
+                        var accessToken = response.access_token;
+                        
+
+                        // Store tokens securely (preferably in sessionStorage)
+                        sessionStorage.setItem('refreshToken', refreshToken);
+                        sessionStorage.setItem('accessToken', accessToken);
+                        //sessionStorage.setItem('expiration', decode.exp);
+                        document.getElementById('authResponse').textContent = 'Authentication successful. Tokens saved.';
+                    } catch (err) {
+                        document.getElementById('authResponse').textContent = 'Problem Parsing Auth: ' + err.message;
+                    }
+                   } else {
+                        document.getElementById('authResponse').textContent = 'Authentication failed. Status code: ' + xhr.status;
+                   }
+             //   }
+            };
+            xhr.send(sendingData);
+
+        }
+
+        function makeAPICall() {
+            var refreshToken = sessionStorage.getItem('refreshToken');
+            if (refreshToken) {
+                // Make API call using the refresh token
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', 'https://example.com/api', true);
+                xhr.setRequestHeader('Authorization', 'Bearer ' + refreshToken);
+
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                        if (xhr.status === 200) {
+                            document.getElementById('apiResponse').textContent = 'API call successful';
+                        } else {
+                            document.getElementById('apiResponse').textContent = 'API call failed. Status code: ' + xhr.status;
+                        }
+                    }
+                };
+
+                xhr.send();
+            } else {
+                document.getElementById('apiResponse').textContent = 'No refresh token found';
+            }
+        }
+
+        function decodeJWT(token) {
+            return JSON.parse(atob(token.split('.')[1]));
+        }
+
+    </script>
+</head>
+<body>
+    <h2>Test Token Authentication</h2> <br>
+    Note: user name has to be longer than 5 characters <br>
+    <label for="username">Username:</label>
+    <input type="text" id="username" value="Admin">
+    <br>
+    <label for="password">Password:</label>
+    <input type="password" id="password" value="Admin">
+    <br>
+    <label for="serverIP">Server IP:</label>
+    <input type="text" id="serverIP" value="192.168.3.80">
+    <br>
+    <label for="serverPort">Server Port:</label>
+    <input type="text" id="serverPort" value="443">
+    <br>
+    <button type="button" onclick="authenticate()">Authenticate</button>
+    <button type="button" onclick="makeAPICall()">Make API Call</button>
+    <br>
+    <span id="authResponse" class="response"></span>
+    <br>
+    <span id="apidata" class="response"></span>
+</body>
+</html>
