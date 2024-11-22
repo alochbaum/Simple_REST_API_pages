@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>MCM9000 API 4.0 Test Tiles Index</title>
+    <title>MCM9000 API 4.0 Get Receiver Data</title>
 </head>
 <body>
-    <h2>MCM9000 API 4.0 Get Layout_Types</h2>
+    <h2>MCM9000 API 4.0  Get Receiver Data</h2>
 	
     Enter MCM User Name:  <input type="text" id="user" value="Admin"/>Password: <input type="password" id="password" value="Admin"/>
-    <br>Enter MCM IP or URL <input type="text" id="address" value="192.168.3.50"/><br>
+    <br>Enter MCM IP or URL <input type="text" id="address" value="192.168.3.49"/><br>
 
-    <button type="button" id="btn_layout_types" onclick="PostMCMCommand()">First get layout_types</button>
+    <button type="button" id="btn_layout_types" onclick="PostMCMCommand()">Get Receiver Data</button>
     <div>
         <span class="replace"> Displays Status </span>
     </div>
@@ -34,7 +34,7 @@
         var password = document.getElementById("password").value;
         var address = "http://" + document.getElementById("address").value;
 
-        XMLReq.open("Get", address + "/api/4.0/layout_types/.json");
+        XMLReq.open("Get", address + "/api/4.0/receivers/.json");
         XMLReq.setRequestHeader("Authorization", 'Basic ' + btoa(username+":"+password));
         XMLReq.setRequestHeader("Content-Type", "application/json");
         XMLReq.send();
@@ -42,24 +42,24 @@
     function callback(xhr)
     {
             var convert = xhr.responseText;
-			var jsonData = JSON.parse(convert);
+			//var jsonData = JSON.parse(convert);
 			
-            var jString="<br>UUID                  --- label -- resolution <br>";
-			//jString+=jsonStr;
+            //var jString="<br>UUID                  --- label -- resolution <br>";
+			jString=jsonStr;
   
             //for (let i = 0; i < 4; i++) {  
-			for(var i in jsonData) {
+		//	for(var i in jsonData) {
                 // adding back in the 1 start and 2 end curly braces lost in split
                 //jsonStr = '{'+encodeArray[i]+']}';
                 //jsonData = JSON.parse(jsonStr); 
                 //el.textContent = jsonData["Encoder"]["title"];               
-                jString += jsonData[i]["LayoutType"]["uuid"];
-                jString += " ----- ";
-                jString += jsonData[i]["LayoutType"]["label"]
-                jString += " ----- ";
-                jString += jsonData[i]["LayoutType"]["resolution"];            
-                jString+= '<br>';                              
-            }
+           //     jString += jsonData[i]["LayoutType"]["uuid"];
+         //       jString += " ----- ";
+         //       jString += jsonData[i]["LayoutType"]["label"]
+         //       jString += " ----- ";
+         ////       jString += jsonData[i]["LayoutType"]["resolution"];            
+         //       jString+= '<br>';                              
+         //  }
             
             document.getElementsByClassName("replace2")[0].innerHTML = jString;
 			document.getElementById("btn_layout_types").innerHTML = "Refresh Layout_Types";
