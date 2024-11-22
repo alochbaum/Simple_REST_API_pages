@@ -4,69 +4,46 @@
     <title>MCM9000 API 4.0 Get Receiver Data</title>
 </head>
 <body>
-    <h2>MCM9000 API 4.0  Get Receiver Data 2 2222222222222222222222222</h2>
-	
-    Enter MCM User Name:  <input type="text" id="user" value="Admin"/>Password: <input type="password" id="password" value="Admin"/>
-    <br>Enter MCM IP or URL <input type="text" id="address" value="192.168.3.49"/><br>
-
-    <button type="button" id="btn_layout_types" onclick="PostMCMCommand()">Get Receiver Data</button>
+    <h2>MCM9000 API 4.0 Get Receiver Data</h2>
+    
+    <label>Enter MCM User Name: <input type="text" id="user" value="Admin"/></label>
+    <label>Password: <input type="password" id="password" value="Admin"/></label>
+    <br>
+    <label>Enter MCM IP or URL: <input type="text" id="address" value="192.168.3.49"/></label>
+    <br>
+    <button type="button" id="btn_layout_types" onclick="postMCMCommand()">Get Receiver Data</button>
     <div>
-        <span class="replace"> Displays Status </span>
+        <span class="replace">Displays Status</span>
     </div>
     <div>
         <span class="replace2"></span>
     </div>
 
     <script>
-    var XMLReq;
-    var holdReturn="";    ;
-    function PostMCMCommand() {
- 
-        XMLReq = new XMLHttpRequest();
-        XMLReq.onreadystatechange = function()
-        {
-            holdReturn += XMLReq.status+" = ";
-            document.getElementsByClassName("replace")[0].innerHTML = "Returned Code: " + holdReturn;
-            if (XMLReq.status != 200 ) return;
-            callback(XMLReq);
-        };
-        var username = document.getElementById("user").value;
-        var password = document.getElementById("password").value;
-        var address = "http://" + document.getElementById("address").value;
+        function postMCMCommand() {
+            const xhr = new XMLHttpRequest();
+            const user = document.getElementById("user").value;
+            const password = document.getElementById("password").value;
+            const address = "http://" + document.getElementById("address").value;
+            const replaceElement = document.getElementsByClassName("replace")[0];
+            const replaceElement2 = document.getElementsByClassName("replace2")[0];
 
-        XMLReq.open("Get", address + "/api/4.0/receivers/.json");
-        XMLReq.setRequestHeader("Authorization", 'Basic ' + btoa(username+":"+password));
-        XMLReq.setRequestHeader("Content-Type", "application/json");
-        XMLReq.send();
-    }
-    function callback(xhr)
-    {
-            var convert = xhr.responseText;
-			//var jsonData = JSON.parse(convert);
-			
-            //var jString="<br>UUID                  --- label -- resolution <br>";
-			jString=jsonStr;
-  
-            //for (let i = 0; i < 4; i++) {  
-		//	for(var i in jsonData) {
-                // adding back in the 1 start and 2 end curly braces lost in split
-                //jsonStr = '{'+encodeArray[i]+']}';
-                //jsonData = JSON.parse(jsonStr); 
-                //el.textContent = jsonData["Encoder"]["title"];               
-           //     jString += jsonData[i]["LayoutType"]["uuid"];
-         //       jString += " ----- ";
-         //       jString += jsonData[i]["LayoutType"]["label"]
-         //       jString += " ----- ";
-         ////       jString += jsonData[i]["LayoutType"]["resolution"];            
-         //       jString+= '<br>';                              
-         //  }
-            
-            document.getElementsByClassName("replace2")[0].innerHTML = jString;
-			document.getElementById("btn_layout_types").innerHTML = "Refresh Layout_Types";
-            //document.getElementsByClassName("replace2")[0].innerHTML = convert;
-			//document.getElementsByClassName("replace2")[0].innerHTML = encodeArray.length;
-        
-    }
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    replaceElement.innerHTML = "Returned Code: " + xhr.status;
+                    if (xhr.status === 200) {
+                        const responseText = xhr.responseText;
+                        replaceElement2.innerHTML = responseText;  // You can modify this to parse and display JSON as needed
+                        document.getElementById("btn_layout_types").innerHTML = "Refresh Layout Types";
+                    }
+                }
+            };
+
+            xhr.open("GET", address + "/api/4.0/receivers/.json");
+            xhr.setRequestHeader("Authorization", 'Basic ' + btoa(user + ":" + password));
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.send();
+        }
     </script>
 </body>
 </html>
