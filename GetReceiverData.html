@@ -19,7 +19,7 @@
         <span class="replace2"></span>
     </div>
     <div>
-        <span class="replace3"></span>
+        <span class="RAWreplace"></span>
     </div>
     <script>
         function postMCMCommand() {
@@ -29,6 +29,7 @@
             const address = "http://" + document.getElementById("address").value;
             const replaceElement = document.getElementsByClassName("replace")[0];
             const replaceElement2 = document.getElementsByClassName("replace2")[0];
+            const RAWreplaceElement = document.getElementsByClassName("RAWreplace")[0];
 
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -36,7 +37,7 @@
                     if (xhr.status === 200) {
                         const responseText = xhr.responseText;
                         replaceElement2.innerHTML = "Bubu here";
-                        replaceElement3.innerHTML = responseText;  // You can modify this to parse and display JSON as needed
+                        RAWreplaceElement.innerHTML = responseText;  // You can modify this to parse and display JSON as needed
                         document.getElementById("btn_layout_types").innerHTML = "Refresh Layout Types";
                     }
                 }
