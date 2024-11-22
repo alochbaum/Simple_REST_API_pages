@@ -38,8 +38,9 @@
                     if (xhr.status === 200) {
                         const responseText = xhr.responseText;
                         var jsonData = JSON.parse(responseText);
-                        replaceElement2.innerHTML = "bubu";
+                        //replaceElement2.innerHTML = "bubu";
                         //replaceElement2.innerHTML = jsonData[0]["Receiver"]["receiver_uuid"];
+                        replaceElement2.innerHTML = jsonData[0]["receiver_uuid"];
                         replaceElement3.innerHTML = responseText;  // You can modify this to parse and display JSON as needed
                         document.getElementById("btn_layout_types").innerHTML = "Refresh Layout Types";
                     }
