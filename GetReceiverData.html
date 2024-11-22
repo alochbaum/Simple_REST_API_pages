@@ -18,7 +18,9 @@
     <div>
         <span class="replace2"></span>
     </div>
-
+    <div>
+        <span class="Rawreplace"></span>
+    </div>
     <script>
         function postMCMCommand() {
             const xhr = new XMLHttpRequest();
@@ -33,7 +35,8 @@
                     replaceElement.innerHTML = "Returned Code: " + xhr.status;
                     if (xhr.status === 200) {
                         const responseText = xhr.responseText;
-                        replaceElement2.innerHTML = responseText;  // You can modify this to parse and display JSON as needed
+                        replaceElement2.innerHTML = "Bubu here";
+                        replaceElement3.innerHTML = responseText;  // You can modify this to parse and display JSON as needed
                         document.getElementById("btn_layout_types").innerHTML = "Refresh Layout Types";
                     }
                 }
