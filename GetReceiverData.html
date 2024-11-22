@@ -37,7 +37,8 @@
                     replaceElement.innerHTML = "Returned Code: " + xhr.status;
                     if (xhr.status === 200) {
                         const responseText = xhr.responseText;
-                        replaceElement2.innerHTML = "Bubu here";
+                        var jsonData = JSON.parse(convert);
+                        replaceElement2.innerHTML = jsonData[0]["Receiver"]["receiver_uuid"];
                         replaceElement3.innerHTML = responseText;  // You can modify this to parse and display JSON as needed
                         document.getElementById("btn_layout_types").innerHTML = "Refresh Layout Types";
                     }
