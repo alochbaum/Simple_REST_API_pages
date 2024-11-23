@@ -4,7 +4,7 @@
     <title>MCM9000 API 4.0 Get Receiver Data</title>
 </head>
 <body>
-    <h2>MCM9000 API 4.0 Get Receiver Data with Channel Name</h2>
+    <h2>MCM9000 API 4.0 Get Receiver Data with Label</h2>
     
     <label>Enter MCM User Name: <input type="text" id="user" value="Admin"/></label>
     <label>Password: <input type="password" id="password" value="Admin"/></label>
@@ -31,16 +31,20 @@
             const replaceElement = document.getElementsByClassName("replace")[0];
             const replaceElement2 = document.getElementsByClassName("replace2")[0];
             const replaceElement3 = document.getElementsByClassName("RAWreplace")[0];
-
+			replaceElement2.innerHTML = "";  //Clearing for refreshes by user
+			
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
-                    replaceElement.innerHTML = "Returned Code: " + xhr.status;
+                    replaceElement.innerHTML = "HTML API Returned Code: " + xhr.status;
                     if (xhr.status === 200) {
                         const responseText = xhr.responseText;
                         var jsonData = JSON.parse(responseText);
-                        replaceElement2.innerHTML = jsonData[0]["Receiver"]["receiver_uuid"] + " Called with Channel Lable " + jsonData[0]["Receiver"]["channel_label"]  ;
-                        replaceElement3.innerHTML = responseText;  // You can modify this to parse and display JSON as needed
-                        document.getElementById("btn_layout_types").innerHTML = "Refresh Layout Types";
+						for (var i in jsonData) {
+							replaceElement2.innerHTML += "<br>" + jsonData[i]["Receiver"]["receiver_uuid"] + " --- with label --- " + jsonData[i]["Receiver"]["receiver_label"]  ;
+						}
+						replaceElement3.innerHTML = "--End--";
+                        //replaceElement3.innerHTML = responseText;  // You can modify this to parse and display JSON as needed
+                        document.getElementById("btn_layout_types").innerHTML = "Refresh Receiver Data";
                     }
                 }
             };
