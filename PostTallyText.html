@@ -42,9 +42,8 @@ function postMCMCommand() {
   const XMLReq = new XMLHttpRequest();
   XMLReq.onreadystatechange = function () {
     document.getElementsByClassName("replace")[0].innerHTML = `Returned Code: ${XMLReq.status}`;
-    if (XMLReq.status === 200 || XMLReq.status === 302) {
-      callback(XMLReq);
-    }
+    if (XMLReq.status != 200 && XMLReq.status != 302) return;
+    callback(XMLReq);
   };
 
   XMLReq.open("POST", `${address}/api/5.0/tally/command/.json`);
