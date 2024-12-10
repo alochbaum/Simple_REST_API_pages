@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MCM9000 API Tally Text</title>
+</head>
+<body>
+<h2>MCM9000 API Call to Post Tally Text -- (Please edit for your use)</h2>
+Enter MCM User Name: <input type="text" id="user" value="Admin"/>
+Password: <input type="password" id="password" value="Admin"/><br>
+Enter MCM IP or URL <input type="text" id="address" value="192.168.3.49"/> <br>
+Tally Name:  <input type="text" id="tally" value="cust3"/>
+<br>
+Tally (#U0#) Text: <input type="text" id="ttext" value=""/> 
+Text Color:   <input type="color" id="color0" value="#DD2222"/>
+<br>
+<button type="button" onclick="PostMCMCommand()">Post Command to Update Tally Text</button>
+    <div><span class="replace"> Displays Status </span></div>
+    <div><span class="replace2"> </span></div>
+<script>
+var XMLReq;  
+function PostMCMCommand() {
+  XMLReq = new XMLHttpRequest();
+  XMLReq.onreadystatechange = function ()
+  {
+    document.getElementsByClassName("replace")[0].innerHTML = "Returned Code: " + XMLReq.status;      
+    if (XMLReq.status != 200 && XMLReq.status != 302) return;
+    callback(XMLReq);
+  };
+  var username = document.getElementById("user").value;
+  var password = document.getElementById("password").value;
+  var address = "http://" + document.getElementById("address").value;
+  var tally = document.getElementById("tally").value;     
+  var ttext = document.getElementById("ttext").value;    
+  var color0 = document.getElementById("color0").value;    
+  
+  // JSON object replacing tally and 2 colors, note duration is 0 so it will last forever  
+  // first name is "label" in later version 5.6.5 and higher, it is "uuid" in earlier versions
+  var myJSON = '{"data":{"label":"' + tally + '","duration":0,"items":[{"type":"UMD","index":0,"color":"' ;
+  myJSON += color0 + '","text":"'+ttext+'","blink":null}] }}';  
+    
+  XMLReq.open("POST", address + "/api/5.0/tally/command/.json");
+  XMLReq.setRequestHeader("Authorization", 'Basic '+ btoa(username + ':' + password));   
+  XMLReq.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  document.getElementsByClassName("replace2")[0].innerHTML = myJSON;
+  XMLReq.send(myJSON);
+}
+function callback(xhr)
+{
+    var jsonString =JSON.parse(xhr.responseText);
+    var jString = JSON.stringify(jsonString)
+    document.getElementsByClassName("replace2")[0].innerHTML = jString;
+}
+</script>
+</body>
+</html>
